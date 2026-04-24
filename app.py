@@ -4,9 +4,13 @@ import pickle
 import matplotlib.pyplot as plt
 
 # load
-clf_model = pickle.load(open("clf_model.pkl", "rb"))
-reg_model = pickle.load(open("reg_model.pkl", "rb"))
+@st.cache_resource
+def load_models():
+    clf = pickle.load(open("clf_model.pkl", "rb"))
+    reg = pickle.load(open("reg_model.pkl", "rb"))
+    return clf, reg
 
+clf_model, reg_model = load_models()
 # Config
 st.set_page_config(page_title="Student Prediction App", layout="wide")
 
